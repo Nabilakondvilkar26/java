@@ -46,3 +46,103 @@ public class changecolor extends JFrame {
         });
     }
 }
+
+
+
+//create a swing application to demonstrate use of scrollpane to change its color selected using color chooser
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+public class ColorChnager extends JFrame
+{
+    private JScrollPane scrollPane= new JScrollPane();
+    private JButton changeColorButton=new JButton("change Color");
+    public ColorChnager(){
+        setTitle("ScrollPane Color Changer");
+        setSize(400,300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+        add(scrollPane,BorderLayout.CENTER);
+        add(changeColorButton,BorderLayout.SOUTH);
+        changeColorButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                Color selectedColor=JColorChooser.showDialog
+                        (null,"Chooose a Color",scrollPane.getBackground());
+                if(selectedColor!=null){
+                    scrollPane.getViewport().setBackground(selectedColor);
+                }
+            }
+        });
+    }
+    public static void main(String[]args){
+        SwingUtilities.invokeLater(()->{
+            new ColorChnager().setVisible(true);
+        });
+    }
+}
+
+//create a swing application to demonstrate use of textarea using scrollpane to show contest of text file in textarea.
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class ShowFileInTextArea extends JFrame
+{
+    private JTextArea textArea = new JTextArea (20, 40);
+
+    private JButton openFileButton = new JButton("Open File");
+
+public ShowFileInTextArea() {
+    setTitle("File Viewer");
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setLayout(new BorderLayout());
+    JScrollPane scrollPane = new JScrollPane(textArea);
+    add(scrollPane, BorderLayout.CENTER);
+    add(openFileButton, BorderLayout.SOUTH);
+    openFileButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            openfile();
+        }
+    });
+
+    pack();
+
+    setLocationRelativeTo(null);
+    // Center the frame on the screen
+}
+private void openfile() {
+    JFileChooser fileChooser = new JFileChooser();
+    int result = fileChooser.showOpenDialog(this);
+    if (result == JFileChooser.APPROVE_OPTION) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileChooser.getSelectedFile()))) {
+            StringBuilder content = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+            textArea.setLineWrap(true);
+            textArea.setText(content.toString());
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading the file.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
+public static void main(String[] args)
+{
+    SwingUtilities.invokeLater(()->
+    {
+        new ShowFileInTextArea().setVisible(true);
+    });
+
+        }
+    }
+
+
