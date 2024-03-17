@@ -1,0 +1,48 @@
+//create a swing application that randomly changes color on button click.
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
+public class changecolor extends JFrame {
+    private JPanel colorPanel;
+    private JButton changecolorbutton;
+    public changecolor()
+    {
+        setTitle("Randon color changer");
+        setSize(300,200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+        colorPanel=new JPanel();
+        changecolorbutton=new JButton("Change color.");
+
+        add(colorPanel,BorderLayout.CENTER);
+        add(changecolorbutton,BorderLayout.SOUTH);
+
+        changecolorbutton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changecolor();
+
+            }
+        });
+    }
+    private void changecolor()
+    {
+        Random random=new Random();
+        Color randomColor=new Color(random.nextInt(256),random.nextInt(256),random.nextInt(256));
+
+        colorPanel.setBackground(randomColor);
+    }
+
+    public static void main(String []args)
+
+    {
+        SwingUtilities.invokeLater(() ->
+        {
+            changecolor app=new changecolor();
+            app.setVisible(true);
+        });
+    }
+}
