@@ -1,0 +1,245 @@
+//Action Event with button click.
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+public class btn {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Button click Demo");
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+
+        JButton button = new JButton("Click me");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "Button clicked!!");
+            }
+        });
+        frame.getContentPane().add(button);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    }
+
+//action event with menu
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+public class menu {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Menu item click Demo");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //JButton button = new JButton("Click me");
+        JMenuBar menuBar=new JMenuBar();
+        JMenu fileMenu=new JMenu("File");
+        JMenuItem openItem=new JMenuItem("Open.");
+       openItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "file->open clicked!!");
+            }
+        });
+fileMenu.add(openItem);
+menuBar.add(fileMenu);
+frame.setJMenuBar(menuBar);
+
+frame.setSize(400,300);
+frame.setVisible(true);
+}
+}
+
+
+
+//action event with text field enter key event
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+public class txt {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Text field Enter key demo");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JTextField textField = new JTextField(20);
+
+        textField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "Enter key passed in text field.");
+
+            }
+        });
+        frame.getContentPane().add(textField);
+        frame.pack();
+        frame.setVisible(true);
+    }
+}
+
+
+//selection event
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+public class selectionevent {
+    public static void main(String[] args)
+    {
+        SwingUtilities.invokeLater(()->
+        {
+            JFrame frame=new JFrame("selection event demo.");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+            String[] items={"item1","item2","item3"};
+
+            JComboBox<String>comboBox=new JComboBox<>(items);
+            comboBox.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String selectedItem=(String) comboBox.getSelectedItem();
+                    System.out.println("Selected:"+selectedItem);
+                }
+            });
+            frame.add(comboBox,BorderLayout.CENTER);
+            frame.setSize(300,200);
+            frame.setVisible(true);
+        });
+    }
+}
+
+
+//focusevent
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
+public class focusevent {
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Focus Event");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            //createAndShowGUI();
+            JPanel panel = new JPanel();
+            panel.setPreferredSize(new Dimension(300, 200));
+
+            JLabel label = new JLabel();
+            JTextField textField1 = new JTextField(25);
+            JTextField textField2 = new JTextField(25);
+
+            textField1.addFocusListener(new FocusListener() {
+                @Override
+                public void focusGained(FocusEvent e) {
+                    label.setText("Focus gained");
+                }
+
+                @Override
+                public void focusLost(FocusEvent e) {
+                    label.setText("Focus Lost");
+                }
+            });
+            panel.add(label);
+            panel.add(textField1);
+            panel.add(textField2);
+            frame.add(panel);
+            frame.pack();
+            frame.setVisible(true);
+        });
+    }
+
+
+    }
+
+//program to demonstrate mouseclick mousemotion mouseEvent.
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class mouse {
+    public static void main(String[] args)
+    {
+        SwingUtilities.invokeLater(()->
+        {
+            JFrame frame=new JFrame("MouseCLick event demo");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+            JPanel panel=new JPanel();
+            JLabel jl=new JLabel();
+            panel.add(jl);
+            panel.setPreferredSize(new Dimension(300,200));
+            panel.addMouseListener(new MouseAdapter()
+            {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    JOptionPane.showMessageDialog(frame,"Mouse cliked at(" + e.getX() + "," + e.getY() + ")");
+
+                }
+            });
+            panel.addMouseMotionListener(new MouseAdapter() {
+                @Override
+                public void mouseMoved(MouseEvent e) {
+                    jl.setText("Mouse Moved at("+e.getX()+","+e.getY()+")");
+
+                }
+            });
+            panel.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    frame.setTitle("mouse entered.");
+                }
+                @Override
+                public void mouseExited(MouseEvent e)
+                {
+                    frame.setTitle("Mouse Exited.");
+                }
+            });
+            frame.add(panel);
+            frame.pack();
+            frame.setVisible(true);
+
+        });
+    }
+}
+
+
+//program to demonstate the how to handle keyevent.
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+public class key {
+    public static void main(String[] args)
+    {
+        JFrame frame=new JFrame("All key event.");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JTextField jTextField=new JTextField(20);
+        frame.add(jTextField);
+
+        jTextField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                System.out.println("Key typed:"+e.getKeyChar());
+            }
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                System.out.println("Key pressed:"+KeyEvent.getKeyText(e.getKeyCode()));
+            }
+            @Override
+            public void keyReleased(KeyEvent e)
+            {
+                System.out.println("key released:"+KeyEvent.getKeyText(e.getKeyCode()));
+            }
+
+        });
+        frame.pack();
+        frame.setVisible(true);
+    }
+}
