@@ -1,0 +1,95 @@
+//WAP GUI application to navigate forward and reverse result set data
+
+package forwardback;
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.table.DefaultTableModel;
+import java.sql.*;
+import java.awt.event.*;
+public class Forwardback extends JFrame{
+     private JButton previousButton;
+    private JButton nextButton;
+    private JTextField datafield;
+    private ResultSet resultSet;
+    public Forwardback()
+    {
+        setTitle("ResultSet Navigator");
+        setSize(400,150);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new FlowLayout());
+        
+        previousButton=new JButton("Previous");
+        nextButton=new JButton("Next");
+        datafield=new JTextField(20);
+        
+        add(previousButton);
+        add(datafield);
+        add(nextButton);
+        
+        try
+        {
+            Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/userDetails?characterEncoding=latin1","root","root");
+            Statement statement=connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+            String query="SELECT*FROM user";
+            resultSet=statement.executeQuery(query);
+            displayData();
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        previousButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    if(resultSet.previous())
+                    {
+                        displayData();
+                    }
+                }
+                catch(SQLException ex)
+                {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        nextButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try
+                {
+                    if(resultSet.next())
+                    {
+                        displayData();
+                    }
+                }
+                catch(SQLException ex)
+                {
+                    ex.printStackTrace();
+                }
+            }
+        });
+    }
+    private void displayData()
+    {
+        try
+        {
+            datafield.setText(resultSet.getString("name"));
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    public static void main(String[] args) {
+        // TODO code application logic here
+        SwingUtilities.invokeLater(()->
+        {
+          Forwardback app=new Forwardback();
+            app.setVisible(true);
+        });
+    }
+    
+}
