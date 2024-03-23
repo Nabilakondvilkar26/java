@@ -1,0 +1,92 @@
+//wap to show the details of specified product from a given table selectedusing combo box 
+
+
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.table.DefaultTableModel;
+import java.sql.*;
+import java.awt.event.*;
+public class Userdetail extends JFrame {
+    private JComboBox<String>userComboBox;
+    private JTextField idtextfield;
+    private JTextField nameTextField;
+    public Userdetail()
+    {
+        setTitle("User Detials");
+        setSize(400,150);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new FlowLayout());
+        userComboBox=new JComboBox<>();
+        idtextfield=new JTextField(20);
+        nameTextField = new JTextField(10);
+        add(new JLabel("select ID:"));
+        add(userComboBox);
+        add(new JLabel("Id:"));
+        add(idtextfield);
+        add(new JLabel("Name:"));
+        add(nameTextField);
+        try
+        {
+            Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/userDetails?characterEncoding=latin1","root","root");
+            String query="SELECT id FROM user";
+            PreparedStatement preparedStatement=connection.prepareStatement(query);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
+                int id=resultSet.getInt("id");
+                userComboBox.addItem(Integer.toString(id));
+            }
+            resultSet.close();
+            preparedStatement.close();
+            connection.close();
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        userComboBox.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                String selectId=(String)userComboBox.getSelectedItem();
+                if(selectId!=null)
+                {
+                    try
+                    {
+                        Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/userDetails?characterEncoding=latin1","root","root");
+                        String query="SELECT id,name FROM user WHERE id=?";
+                        PreparedStatement preparedStatement=connection.prepareStatement(query);
+                        preparedStatement.setString(1,selectId);
+                        ResultSet resultSet=preparedStatement.executeQuery();
+                        if(resultSet.next())
+                        {
+                            int id=resultSet.getInt("id");
+                            String name=resultSet.getString("name");
+                            idtextfield.setText(Integer.toString(id));
+                            nameTextField.setText(name);
+                        }
+                        resultSet.close();
+                        preparedStatement.close();
+                        connection.close();
+                    }
+                    catch(SQLException ex)
+                    {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(()->
+        {
+            Userdetail user=new Userdetail();
+            user.setVisible(true);
+        });
+    }
+        // TODO code application logic here
+    }
