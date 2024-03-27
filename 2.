@@ -1,0 +1,51 @@
+//wap to implement the concept of inherintace and method overriding.
+class A
+{
+    void show()
+    {
+        System.out.println("Base class.");
+    }
+}
+class B extends A
+{
+    void show()
+    {
+        System.out.println("Derived class");
+    }
+}
+public class pr2a {
+    public static void main(String[] args)
+    {
+        B s= new B();
+        s.show();
+    }
+}
+
+
+//wap to implement the concept of abstract classes and methods.
+abstract class Shape
+{
+    public abstract double area();
+
+}
+class Circle extends Shape
+{
+    private double radius;
+    public Circle(double radius)
+    {
+        this.radius=radius;
+
+}
+@Override
+public double area()
+{
+    return Math.PI*radius*radius;
+}
+}
+public class pr2b {
+    public static void main(String[] args)
+    {
+        Circle circle=new Circle(10.0);
+        System.out.println("Circle area is "+circle.area());
+    }
+}
