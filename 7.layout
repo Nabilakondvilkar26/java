@@ -1,0 +1,94 @@
+//flowlayout
+import javax.swing.*;
+import java.awt.*;
+
+public class demoflowlayout {
+    public static void main(String[] args)
+    {
+        JFrame frame=new JFrame("Flow layout example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300,100);
+
+        JPanel panel=new JPanel(new FlowLayout((FlowLayout.RIGHT)));
+
+        JButton button1=new JButton("button1");
+        JButton button2=new JButton("button2");
+        JButton button3=new JButton("button3");
+
+        panel.add(button1);
+        panel.add(button2);
+        panel.add(button3);
+
+        frame.add(panel);
+        frame.setVisible(true);
+
+    }
+}
+
+
+
+//grid layout
+import javax.swing.*;
+import java.awt.*;
+
+public class gridLayout {
+    public static void main(String[] args)
+    {
+        JFrame frame=new JFrame("Flow grid layout example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300,200);
+
+        JPanel panel=new JPanel(new GridLayout(2,3));
+
+        JButton button1=new JButton("Button1");
+        JButton button2=new JButton("Button2");
+        JButton button3=new JButton("Button3");
+        JButton button4=new JButton("Button4");
+        JButton button5=new JButton("Button5");
+        JButton button6=new JButton("Button6");
+
+        panel.add(button1);
+        panel.add(button2);
+        panel.add(button3);
+        panel.add(button4);
+        panel.add(button5);
+        panel.add(button6);
+
+        frame.add(panel);
+        frame.setVisible(true);
+
+
+    }
+}
+
+
+
+//border layout
+import javax.swing.*;
+import java.awt.*;
+
+public class borderlayout {
+    public static void main(String[] args)
+    {
+        JFrame frame=new JFrame("Flow border layout example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300,200);
+
+        JButton northbutton=new JButton("North");
+        JButton southbutton=new JButton("south");
+        JButton eastbutton=new JButton("East");
+        JButton westbutton=new JButton("west");
+        JButton centerbutton=new JButton("Center");
+
+        Container contentPane=frame.getContentPane();
+        contentPane.setLayout(new BorderLayout());
+
+        contentPane.add(northbutton,BorderLayout.NORTH);
+        contentPane.add(southbutton ,BorderLayout.SOUTH);
+        contentPane.add(eastbutton ,BorderLayout.EAST);
+        contentPane.add( westbutton,BorderLayout.WEST);
+        contentPane.add(centerbutton ,BorderLayout.CENTER);
+
+        frame.setVisible(true);
+    }
+}
