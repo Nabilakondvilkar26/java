@@ -1,3 +1,4 @@
+//ACTION EVENT
 //Action Event with button click.
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -23,7 +24,7 @@ public class btn {
 
     }
 
-//action event with menu
+                    //action event with menu item
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -112,7 +113,7 @@ public class selectionevent {
 }
 
 
-//focusevent
+//focusevent:program to demonstrate focus lost and gained event.
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusEvent;
@@ -154,7 +155,8 @@ public class focusevent {
 
     }
 
-//program to demonstrate mouseclick mousemotion mouseEvent.
+//MOUSEEVENT
+//program to demonstrate mouseclick mousemotion mouseEnter exit.
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
