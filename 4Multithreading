@@ -1,0 +1,190 @@
+//bouncing ball
+crete ball file
+package b;
+import javax.swing.*;
+import java.awt.*;
+public class Ball 
+{
+    
+	public int x, y; 
+	// Position of the ball
+    
+	public int speedX, speedY; 
+	// Speed of the ball
+
+    
+	// Constructor
+    
+	public Ball(int x, int y, int speedX, int speedY) 
+	{
+        
+		this.x = x;
+        		
+		this.y = y;
+        
+		this.speedX = speedX;
+        
+		this.speedY = speedY;
+    
+	}
+
+    
+	// Method to move the ball
+    
+	public void move() 
+	{
+        
+		x += speedX;
+        
+		y += speedY;
+    
+	}
+
+    
+	// Getters and setters
+    
+	public int getX() 
+	{
+        
+		return x;
+    
+	}
+
+    
+	public void setX(int x) 	
+	{
+        
+		this.x = x;
+    
+	}
+
+    
+	public int getY() 
+	{
+        
+		return y;
+    
+	}
+
+    
+	public void setY(int y) 
+	{
+        
+		this.y = y;
+    
+	}
+
+    
+	public int getSpeedX() 
+	{
+        
+		return speedX;
+    
+	}
+
+    
+	public void setSpeedX(int speedX) 
+	{
+        
+		this.speedX = speedX;
+    
+	}
+
+    
+	public int getSpeedY() 
+	{
+        
+		return speedY;
+    
+	}
+
+    
+	public void setSpeedY(int speedY) 
+	{
+        
+		this.speedY = speedY;
+    
+	}
+
+
+	public void draw(Graphics g) 
+	{
+       
+		 
+		g.setColor(Color.RED); 
+		// Set color to red (you can change it)
+        
+		g.fillOval(x, y, 20, 20); 
+		// Draw a red oval representing the ball
+    
+	}
+}
+
+//another file(Bouncingball)
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+importimport java.util.Random;
+public class BouncingBall extends JPanel implements Runnable
+{
+	public static final int WIDTH=800;
+	public static final int HEIGHT=600;
+	private static final int NUM_BALLS=5;
+	private List <Ball>balls;
+	public BouncingBalls()
+	{
+		balls=new ArrayList<>();
+		Random random =new Random();
+		for(int i=0;i< NUM_BALLS;i++)
+			{
+			intx=random.nextInt(WIDTH);
+			inty=random.nextInt(HEIGHT);
+			intxspeed=random.nextInt(5)+1;
+			intyspeed=random.nextInt(5)+1;
+			balls.add(new Ball(x,y,xSpeed,ySpeed,color));
+			}
+		}
+		@Override
+		public void run()
+		{	
+			while(true)
+			{
+				for(Ball ball:balls)
+				{
+					ball.move();
+				}
+		
+				repaint();
+				try
+				{
+					Thread.sleep(10)
+;
+				}
+				catch (InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+		@Override
+		protected void paintComponent(Graphics g)
+		{
+			super.paintComponent(g);
+			for(Ball ball:balls)
+			{
+				ball.draw(g);
+			}
+		}
+		public static void main(String[]args)
+		{
+			JFrame frame =new JFrame("5 Colours Bouncing Balls");
+			BouncingBalls bouncingBalls=new BouncingBalls();
+			frame.add(bouncingBalls);
+			frame.setSize(WIDTH,HEIGHT);
+			frame.setDefaultClaseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setVisible(true);
+			thread thread=new Thread(bouncingBalls);
+			thread.start(0);
+	}
+}
