@@ -1,0 +1,92 @@
+//wap to create a class and implement a default class overloaded and parametized constructur.
+ class cons
+{
+    //private final int c;
+
+    public cons()
+    {
+        System.out.println("Default constructor.");
+    }
+    public cons(int a,int b)
+    {
+
+        System.out.println("It is overloaded constructor.");
+        System.out.println("Sum is");
+         int c=a+b;
+        System.out.println(c);
+       // return (a+b);
+    }
+    public cons(int d)
+    {
+        System.out.println("Its is  parameterized constructor.");
+      //  int e=2;
+        int f=d;
+        System.out.println(f);
+    }
+}
+
+public class p11 {
+    public static void main(String args[])
+    {
+        cons obj=new cons();
+        cons obj2=new cons(5,2);
+        //cons obj3=new cons(obj2);
+        cons obj3=new cons(5);
+    }
+}
+
+//wapto crete a class and implement the concept of method overloading.
+class OR
+{
+    public  int add(int a,int b)
+    {
+        //int c=a+b;
+        System.out.println("sum is=" );
+        System.out.println(a+b);
+        return a+b;
+    }
+    public int add(int a,int b,int c)
+    {
+       // float c=a-b;
+        System.out.println("difference is=");
+        System.out.println(a-b-c);
+        return a-b-c;
+    }
+}
+public class p2 {
+    public static void main(String[]args)
+    {
+        OR obj=new OR();
+        obj.add(5,5);
+        obj.add(5,2,1);
+    }
+}
+
+
+//wap to crete a class and implementation the concept of static methods.
+class p1 {
+
+    public static int add(int a, int b) {
+        System.out.println("Sum is");
+        System.out.println(a + b);
+        return a + b;
+    }
+
+    public static int sub(int a, int b) {
+        System.out.println("Substraction is=");
+        System.out.println(a - b);
+        return a - b;
+    }
+}
+    public class static1
+    {
+        public static void main(String[] agrs)
+        {
+            p1 obj=new p1();
+            obj.add(5,7);
+            p1 obj2=new p1();
+            obj.sub(5,2);
+        }
+
+        }
+
